@@ -10,7 +10,7 @@ from math import log10, floor
 #                                                                              #
 ################################################################################
 
-def Q1_Q2(time,N,L,X0,X1,T0)->np.matrix:
+def Q1_Q2(time,N,X0,X1,T0)->np.matrix:
     ''' Returns the temperature of the bar on N intervals of the bar, 
     in different points of time (dt intervals)
     
@@ -18,8 +18,6 @@ def Q1_Q2(time,N,L,X0,X1,T0)->np.matrix:
     :type time: float
     :param N: Number of intervals of the metal bar
     :type N: int
-    :param L: Length of the metal bar (in meters)
-    :type L: float
     :param X0: Temperature at the beginning of the bar
     :type X0: int
     :param X1: Temperature at the end of the bar
@@ -30,6 +28,8 @@ def Q1_Q2(time,N,L,X0,X1,T0)->np.matrix:
     :returns: matrix with rows = time, columns = position 
     :rtype: np.matrix
     '''
+
+    L = 1
 
     dx = L/N
 
@@ -55,7 +55,7 @@ def Q1_Q2(time,N,L,X0,X1,T0)->np.matrix:
 
     return temp_matrix
 
-def Q3(time,N,L,X0,X1)->np.matrix:
+def Q3(time,N,X0,X1)->np.matrix:
     ''' Returns the temperature of the bar on N intervals of the bar, 
     in different points of time (dt intervals)
     
@@ -63,8 +63,6 @@ def Q3(time,N,L,X0,X1)->np.matrix:
     :type time: float
     :param N: Number of intervals of the metal bar
     :type N: int
-    :param L: Length of the metal bar (in meters)
-    :type L: float
     :param X0: Temperature at the beginning of the bar
     :type X0: int
     :param X1: Temperature at the end of the bar
@@ -73,6 +71,8 @@ def Q3(time,N,L,X0,X1)->np.matrix:
     :returns: matrix with rows = time, columns = position 
     :rtype: np.matrix
     '''
+
+    L = 2
 
     dx = L/N
 
@@ -105,7 +105,7 @@ def Q3(time,N,L,X0,X1)->np.matrix:
 #                                                                              #
 ################################################################################
 
-def proof_Q1(time,N,L,X0,X1,T0,iterations)->np.matrix:
+def proof_Q1(time,N,X0,X1,T0,iterations)->np.matrix:
     ''' Returns the temperature of the bar on N intervals of the bar, 
     in different points of time (dt intervals)
     
@@ -113,8 +113,6 @@ def proof_Q1(time,N,L,X0,X1,T0,iterations)->np.matrix:
     :type time: float
     :param N: Number of intervals of the metal bar
     :type N: int
-    :param L: Length of the metal bar (in meters)
-    :type L: float
     :param X0: Temperature at the beginning of the bar
     :type X0: int
     :param X1: Temperature at the end of the bar
@@ -127,6 +125,8 @@ def proof_Q1(time,N,L,X0,X1,T0,iterations)->np.matrix:
     :returns: matrix with rows = time, columns = position 
     :rtype: np.matrix
     '''
+
+    L = 1
 
     dx = L/N
 
@@ -158,7 +158,7 @@ def proof_Q1(time,N,L,X0,X1,T0,iterations)->np.matrix:
 
     return temp_matrix
 
-def proof_Q2(time,N,L,X0,X1,T0,iterations)->np.matrix:
+def proof_Q2(time,N,X0,X1,T0,iterations)->np.matrix:
     ''' Returns the temperature of the bar on N intervals of the bar, 
     in different points of time (dt intervals)
     
@@ -166,8 +166,6 @@ def proof_Q2(time,N,L,X0,X1,T0,iterations)->np.matrix:
     :type time: float
     :param N: Number of intervals of the metal bar
     :type N: int
-    :param L: Length of the metal bar (in meters)
-    :type L: float
     :param X0: Temperature at the beginning of the bar
     :type X0: int
     :param X1: Temperature at the end of the bar
@@ -180,6 +178,8 @@ def proof_Q2(time,N,L,X0,X1,T0,iterations)->np.matrix:
     :returns: matrix with rows = time, columns = position 
     :rtype: np.matrix
     '''
+
+    L = 1
 
     dx = L/N
 
@@ -223,8 +223,6 @@ def proof_Q3(time,N,L,X0,X1)->np.matrix:
     :type time: float
     :param N: Number of intervals of the metal bar
     :type N: int
-    :param L: Length of the metal bar (in meters)
-    :type L: float
     :param X0: Temperature at the beginning of the bar
     :type X0: int
     :param X1: Temperature at the end of the bar
@@ -233,6 +231,8 @@ def proof_Q3(time,N,L,X0,X1)->np.matrix:
     :returns: matrix with rows = time, columns = position 
     :rtype: np.matrix
     '''
+
+    L = 2
 
     dx = L/N
 
