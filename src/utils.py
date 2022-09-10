@@ -38,6 +38,8 @@ def Q1_Q2(time,N,X0,X1,T0)->np.matrix:
     # rounds dt to get the most significant digit
     dt = round(0.2*dx*dx,-int(floor(log10(abs(0.2*dx*dx)))))
 
+    print(dt,dx)
+
     number_time_interval = int(time/dt)
 
     temp_matrix = np.zeros((number_time_interval+1,N+1))
@@ -79,7 +81,9 @@ def Q3(time,N,X0,X1)->np.matrix:
     global dt
 
     # rounds dt to get the most significant digit
-    dt = round(0.2*dx*dx,-int(floor(log10(abs(0.2*dx*dx)))))
+    dt = round(0.4*dx*dx,-int(floor(log10(abs(0.4*dx*dx)))))
+
+    print(dt,dx)
 
     number_time_interval = int(time/dt)
 
@@ -131,7 +135,7 @@ def proof_Q1(time,N,X0,X1,T0,iterations)->np.matrix:
     dx = L/N
 
     # rounds dt to get the most significant digit
-    dt = round(0.2*dx*dx,-int(floor(log10(abs(0.2*dx*dx)))))
+    dt = round(0.4*dx*dx,-int(floor(log10(abs(0.4*dx*dx)))))
 
     number_time_interval = int(time/dt)
 
@@ -184,7 +188,7 @@ def proof_Q2(time,N,X0,X1,T0,iterations)->np.matrix:
     dx = L/N
 
     # rounds dt to get the most significant digit
-    dt = round(0.2*dx*dx,-int(floor(log10(abs(0.2*dx*dx)))))
+    dt = round(0.4*dx*dx,-int(floor(log10(abs(0.4*dx*dx)))))
 
     number_time_interval = int(time/dt)
 
@@ -215,7 +219,7 @@ def proof_Q2(time,N,X0,X1,T0,iterations)->np.matrix:
 
     return temp_matrix
 
-def proof_Q3(time,N,L,X0,X1)->np.matrix:
+def proof_Q3(time,N,X0,X1)->np.matrix:
     ''' Returns the temperature of the bar on N intervals of the bar, 
     in different points of time (dt intervals)
     
@@ -223,6 +227,8 @@ def proof_Q3(time,N,L,X0,X1)->np.matrix:
     :type time: float
     :param N: Number of intervals of the metal bar
     :type N: int
+    :param L: Length of the metal bar (in meters)
+    :type L: float
     :param X0: Temperature at the beginning of the bar
     :type X0: int
     :param X1: Temperature at the end of the bar
@@ -237,7 +243,7 @@ def proof_Q3(time,N,L,X0,X1)->np.matrix:
     dx = L/N
 
     # rounds dt to get the most significant digit
-    dt = round(0.2*dx*dx,-int(floor(log10(abs(0.2*dx*dx)))))
+    dt = round(0.4*dx*dx,-int(floor(log10(abs(0.4*dx*dx)))))
 
     number_time_interval = int(time/dt)
 
@@ -353,4 +359,77 @@ def graph(time,proof,experimental,L,N,question):
                     hspace=0.3
                 )
 
-    fig.savefig(f'./images/{question}.png',bbox_inches='tight')
+    fig.savefig(f'./images/{question}_dt.png',bbox_inches='tight')
+
+def graph_last(time,proof,experimental,L,N,question):
+    ''' Plots grah for proof and experimental data for the 3 questions
+    
+    :param time: Time to run the simulation (in seconds)
+    :type time: float
+    :param proof: Proof matrix
+    :type proof: np.matrix
+    :param experimental: Computed matrix
+    :type experimental: np.matrix
+    :param L: Length of the metal bar (in meters)
+    :type L: float
+    :param N: Number of intervals of the metal bar
+    :type N: int
+    :param question: Question name
+    :type question: str
+    
+    :returns: 2x2 image
+    :rtype: .png
+    '''
+
+    timeArray = np.arange(0,time,dt)
+
+    positionArray = np.linspace(0,L,N+1)
+
+    sns.set_theme(style="whitegrid")
+
+    fig, ax = plt.subplots(figsize = (15,8))
+
+    dataColor = list(zip([experimental,proof],['#e63946','#219ebc']))
+
+    t = int(len(timeArray))-2
+
+    for data,color in dataColor:
+
+        sns.lineplot(
+            x = positionArray,
+            y = data[t,:],
+            color = color,
+            linewidth=2)
+
+        ax.set_title(
+            f'Time = {round(t*dt,2)} (seconds)',
+            fontweight = 'bold',
+            fontsize=17
+            )
+
+        ax.set_xlabel(
+            'Position (m)',
+            fontsize=15
+            )
+
+        ax.set_ylabel(
+            'Temperature (°C)',
+            fontsize=15
+            )
+
+    fig.suptitle(
+        'Computed x Exact Solution',
+        fontsize= 22,
+        fontweight = 'bold',
+        y = 1.01
+    )    
+    
+    plt.legend(
+        ['Computed', 'Exact Solution'],
+        bbox_to_anchor=(0.17, 1.13, 0.52, 0), 
+        ncol=2,
+        fontsize=18,
+        frameon=False
+        )
+
+    fig.savefig(f'./images/{question}_inf.png',bbox_inches='tight')
